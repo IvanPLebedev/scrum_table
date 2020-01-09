@@ -1,0 +1,20 @@
+{% extends 'table/base.html' %}
+{% block content %}
+    <ul>
+        {% for status in statuses %}
+            <p1>
+                {{ status }}
+                <ul>
+                    {% for task in tasks %}
+                        {% if task.status == status %}
+                            <li>{{ task }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </p1>
+        {% empty %}
+            <li>У вас нет поставленных задач.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'table:tasks'%}">Добавить новую задачу.</a>
+{% endblock content %}
