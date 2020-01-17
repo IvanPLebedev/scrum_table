@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Status, Task
-from .forms import TaskForm, StatusFromTaskForm
+from .forms import TaskForm, ChooseStatusForm
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
