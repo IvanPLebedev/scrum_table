@@ -1,0 +1,11 @@
+{% extends 'table/base.html' %}
+
+{% block content %}
+    <p>Поставьте новую задачу:</p>
+    <form action="{% url 'table:add_task' %}" method="POST">
+        {% csrf_token %}
+        {{ statusForm.as_p }}
+        {{ taskForm.as_p }}
+        <button name="submit">Добавить задачу.</button>
+    </form> 
+{% endblock content %}

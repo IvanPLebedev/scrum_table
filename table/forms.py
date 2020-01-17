@@ -13,4 +13,9 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ['title']
-        labels = {'title': ''}
+        labels = {'title': 'Задача:'}
+
+class ChooseStatusForm(forms.Form):
+    status = forms.ModelChoiceField(queryset = Status.objects.all(),
+        label = 'Статус задачи')
+
