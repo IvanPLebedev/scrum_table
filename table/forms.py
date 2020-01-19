@@ -1,13 +1,18 @@
 from django import forms
 
-from .models import Status, Task
+from .models import Status, Task, Project
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['name', 'description']
+        labels = {'name':'Название прокта:', 'description': 'Описание:'}
 
 class StatusForm(forms.ModelForm):
     class Meta:
         model = Status
         fields = ['title']
         labels = {'title': ''}
-
 
 class TaskForm(forms.ModelForm):
     class Meta:

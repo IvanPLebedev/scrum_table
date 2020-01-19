@@ -1,0 +1,9 @@
+{% extends 'table/base.html' %}
+{% block content %}
+    <p>Создайте новый проект:</p>
+    <form action="{% url 'table:add_project' %}" method="POST">
+        {% csrf_token %}
+        {{ projectForm.as_p }}
+        <button name="submit">Добавить проект</button>
+    </form> 
+{% endblock content %}

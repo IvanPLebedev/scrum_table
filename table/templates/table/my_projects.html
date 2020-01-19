@@ -1,0 +1,13 @@
+{% extends 'table/base.html' %}
+{% block content %}
+    <ul>
+        {% for project in projects %}
+            <p>
+                {{project}}
+            </p>
+        {% empty %}
+            <li>У вас нет проектов.</li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'table:add_project'%}">Добавить новый проект</a>
+{% endblock content %}

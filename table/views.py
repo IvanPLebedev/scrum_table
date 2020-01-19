@@ -1,12 +1,28 @@
 from django.shortcuts import render
-from .models import Status, Task
-from .forms import TaskForm, ChooseStatusForm
+from .models import Status, Task, Project
+from .forms import TaskForm, ChooseStatusForm, ProjectForm
 
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
 def index(request):
 	return render(request, 'table/index.html')
+
+def my_projects(request):
+    projects = Project.objects.order_by('id')
+    context = {'projects': projects}
+    return render(request, 'table/my_projects.html', context)
+
+def add_project(request):
+    if request.method != 'POST':
+        projectForm = ProjectForm()
+    else:
+        projectForm = ProjectForm(request.POST)
+        if projectForm.is_valid():
+            projectForm.save()
+            return HttpResponseRedirect(reverse('table:my_projects'))
+    context = {'projectForm': projectForm}
+    return render(request, 'table/add_project.html', context)
 
 def tasks(request):
     statuses = Status.objects.order_by('id')
@@ -27,6 +43,6 @@ def add_task(request):
             new_task.status = status
             new_task.save()
             return HttpResponseRedirect(reverse('table:tasks'))
-    context = {'taskForm': taskForm, 'statusForm': statusForm}
+    context = {'taskForm': taskForm, 'statusForm': chooseStatusForm}
     return render(request, 'table/add_task.html', context)
 
