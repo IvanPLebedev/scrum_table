@@ -2,9 +2,9 @@
 {% block content %}
     <ul>
         {% for project in projects %}
-            <p>
-                {{project}}
-            </p>
+            <li>
+                <a href="{% url 'table:project' project.id %}">{{project}}</a>
+            </li>
         {% empty %}
             <li>У вас нет проектов.</li>
         {% endfor %}

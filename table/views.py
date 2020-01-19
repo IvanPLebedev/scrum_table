@@ -13,6 +13,17 @@ def my_projects(request):
     context = {'projects': projects}
     return render(request, 'table/my_projects.html', context)
 
+def project(request, project_id):
+    project = Project.objects.get(id = project_id)
+    statuses = project.status_set.order_by('id')
+    tasks = []
+    if statuses:
+        for status in statuses:
+            tasks += status.task_set.order_by('id')
+    context = {'project': project,'statuses': statuses, 'tasks': tasks}
+    return render(request, 'table/project.html', context)
+
+
 def add_project(request):
     if request.method != 'POST':
         projectForm = ProjectForm()
@@ -23,12 +34,6 @@ def add_project(request):
             return HttpResponseRedirect(reverse('table:my_projects'))
     context = {'projectForm': projectForm}
     return render(request, 'table/add_project.html', context)
-
-def tasks(request):
-    statuses = Status.objects.order_by('id')
-    tasks = Task.objects.order_by('id')
-    context = {'statuses': statuses, 'tasks': tasks}
-    return render(request, 'table/tasks.html', context)
 
 def add_task(request):
     if request.method != 'POST':

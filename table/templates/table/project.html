@@ -1,6 +1,7 @@
 {% extends 'table/base.html' %}
 {% block content %}
     <ul>
+    <p>{{project}}</p>
         {% for status in statuses %}
             <p1>
                 {{ status }}
@@ -13,8 +14,8 @@
                 </ul>
             </p1>
         {% empty %}
-            <li>У вас нет поставленных задач.</li>
+            <li>Нет статусов для задач</li>
         {% endfor %}
     </ul>
-    <a href="{% url 'table:add_task'%}">Добавить новую задачу.</a>
+    <a href="{% url 'table:add_task'%}">Добавить новую задачу</a>
 {% endblock content %}
